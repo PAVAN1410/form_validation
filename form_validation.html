@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form validation</title>
+    <style>
+        *{
+            margin: 0px;
+        }
+        html{
+    margin: 0;
+    padding: 0;
+}
+*{
+    margin: 5px 10px;
+    font-size: 20px;
+    
+}
+body{
+    /* background-color: rebeccapurple; */
+    background-image: url('https://www.nicepng.com/png/full/26-266973_image-page-transparent-background-oasis-skin-1-png.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    
+}
+
+form{
+    position: relative;
+    width: 600px;
+    /* border: 3px solid red; */
+    display: flex;
+    /* overflow: hidden; */
+    justify-content: center;
+    /* align-items: center; */
+    flex-direction: column;
+    animation: slide_in 3s ease forwards;
+    /* margin-top: 100px; */
+
+}
+
+@keyframes slide_in{
+    from {
+        /* width: 0px; */
+        /* height: 0; */
+        margin: 0px;
+
+    }
+
+    to{
+        /* width: 600px; */
+        /* height: auto; */
+        margin: 10px 50vw;
+        transform: translateX(-50%);
+    }
+}
+
+
+
+
+p{
+    display: block;
+    width: 150px;
+    margin: auto;
+    font-size: 15px;
+    font-weight: bold;
+}
+select,option, input,textarea{
+    background-color: #c6dee8;
+    padding: 5px 2px;
+    color:rgb(16, 41, 185);
+    font-weight: 800;
+    text-align: center;
+}
+
+label{
+    color: rgb(15, 15, 82);
+    font-weight: 600;
+}
+
+
+#phone_number,
+#email{
+    background-color: skyblue;
+    color: rgb(202, 111, 111);
+}
+
+
+
+    </style>
+</head>
+
+<body>
+    <form action="index.html">
+        <div>
+            <label for="book_name">Title</label>
+            <input type="text" name="book_name" id="book_name" placeholder='Harry potter' required>
+            <p id="book_name_p" style="display: none;"></p>
+        </div>
+        <div>
+            <label for="Author">Authors of book</label>
+            <input type="text" name="Author" id="author" placeholder='Author1,Author2,Author3,Author4,Author5' required>
+            <p id="author_p" style="display: none;"></p>
+        </div>
+        <div>
+            <label for="ISBN_number">ISBN_number</label>
+            <input type="text" name="ISBN_number" id="ISBN_number" placeholder='Eg: 12-34-1456-10-3440'required>
+            <p id="ISBN_number_p" style="display: none;"></p>
+        </div>
+        <div>
+            <label for="publisher">publisher</label>
+            <input type="text" name="publisher" id="publisher" placeholder='Eg: Geetha arts publications' required>
+            <p id="publisher_p" style="display: none;"></p>
+        </div>
+        <div>
+            <label for="Edition">Edition</label>
+            <input type="text" name="Edition" id="edition" required placeholder='Three'>
+            <p id="edition_p" style="display: none;"></p>
+        </div>
+        <div>
+            <label for="Price">Price</label>
+            <input type="text" name="Price" id="price" placeholder='Eg: 300' required>
+            <p id = "price_p" style="display: none;"></p>
+        </div>
+        <div>
+            <label for="Date of publication">Date of publication</label>
+            <input type="text" name="Date_of_publication" id="Date_of_publication" placeholder='Eg: 01/12/19' required>
+            <p id = "Date_of_publication_p" style="display: none;"></p>
+        </div>
+        <div>
+            <input type="submit" id='submit' value="submit">
+        </div>
+    </form>
+    <script>
+        let submit = document.getElementById('submit');
+        submit.addEventListener('click', validate);
+        function validate(e) {
+            e.preventDefault();
+            book_name = document.getElementById('book_name');
+            if (book_name.value.length > 75) {
+                document.getElementById("book_name_p").innerHTML = 'You have crossed maximum no of characters';
+                document.getElementById("book_name_p").style.display='block'
+            }
+            else{
+                document.getElementById('book_name_p').style.display = 'none'
+            }
+            author = document.getElementById('author');
+            patt = /,/g;
+            var x=author.value.match(patt);
+            if(x!=null && x.length>4){
+                document.getElementById("author_p").innerHTML = 'Maximum no of authors is limited to 5';
+                document.getElementById("author_p").style.display='block'
+            }else{
+                document.getElementById('author_p').style.display = 'none'
+            }
+            ISBN_number = document.getElementById('ISBN_number');
+            patt =  /[0-9]*[-| ][0-9]*[-| ][0-9]*[-| ][0-9]*[-| ][0-9]*/g
+            x= ISBN_number.value.match(patt);
+            console.log(x);
+            if(x==null){
+                document.getElementById("ISBN_number_p").innerHTML = 'Please follow the order given in placeholder';
+                document.getElementById("ISBN_number_p").style.display='block'
+            }else{
+                document.getElementById('ISBN_number_p').style.display = 'none'
+            }
+            publisher = document.getElementById('publisher');
+            if (publisher.value.length > 30) {
+                document.getElementById("publisher_p").innerHTML = 'You have crossed maximum no of characters';
+                document.getElementById("publisher_p").style.display='block'
+            }else{
+                document.getElementById('publisher_p').style.display = 'none'
+            }
+            edition = document.getElementById('edition');
+            patt = /[1-9]/g
+            x = edition.value.match(patt);
+            if (x!=null) {
+                document.getElementById("edition_p").innerHTML = 'Please provide string without numbers';
+                document.getElementById("edition_p").style.display='block'
+            }else{
+                document.getElementById('edition_p').style.display = 'none'
+            }
+            price = document.getElementById('price');
+            patt = /[A-Z]*[a-z]*/g
+            x = price.value.match(patt);
+            if (x!=null) {
+                document.getElementById("price_p").innerHTML = 'please provide a true number';
+                document.getElementById("price_p").style.display='block'
+            }else{
+                document.getElementById('price_p').style.display = 'none'
+            }
+            Date_of_publication = document.getElementById('Date_of_publication');
+            patt = /[0-3][0-9]\/[0-1][0-9]\/[0-9][0-9]/g
+            x = Date_of_publication.value.match(patt);
+            console.log(x);
+            if (x==null) {
+                document.getElementById("Date_of_publication_p").innerHTML = 'please follow the format given in the placeholder';
+                document.getElementById("Date_of_publication_p").style.display='block'
+            }else{
+                document.getElementById('Date_of_publication_p').style.display = 'none'
+            }
+        }
+
+    </script>
+</body>
