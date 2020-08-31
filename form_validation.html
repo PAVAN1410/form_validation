@@ -1,100 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Validation for phone number regex (?:(\+1)[ -])?\(?(?<g1>\d{3})\)?[-| ]?(?<g2>\d{3})[- ]?(?<g3>\d{4}) -->
+<!-- ?: in a paranthesis represents dont capture that group <....>some value in angular brakets in paranthesis represents the group name -->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form validation</title>
     <style>
-        *{
+        * {
             margin: 0px;
         }
-        html{
-    margin: 0;
-    padding: 0;
-}
-*{
-    margin: 5px 10px;
-    font-size: 20px;
-    
-}
-body{
-    /* background-color: rebeccapurple; */
-    background-image: url('https://www.nicepng.com/png/full/26-266973_image-page-transparent-background-oasis-skin-1-png.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-    
-}
 
-form{
-    position: relative;
-    width: 600px;
-    /* border: 3px solid red; */
-    display: flex;
-    /* overflow: hidden; */
-    justify-content: center;
-    /* align-items: center; */
-    flex-direction: column;
-    animation: slide_in 3s ease forwards;
-    /* margin-top: 100px; */
+        html {
+            margin: 0;
+            padding: 0;
+        }
 
-}
+        * {
+            /* overflow: hidden; */
+            margin: 5px 10px;
+            font-size: 20px;
 
-@keyframes slide_in{
-    from {
-        /* width: 0px; */
-        /* height: 0; */
-        margin: 0px;
+        }
 
-    }
+        body {
+            /* background-color: rebeccapurple; */
+            background-image: url('https://i.pinimg.com/originals/67/18/22/671822c2f63dd5f65d8fd15c9710420b.jpg');
+            background-size: 100% 100%;
+            /* opacity: 0.8; */
+            /* height: 100vh; */
+            min-height: 100vh;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            /* align-items: center; */
+            /* border: 10px solid red; */
 
-    to{
-        /* width: 600px; */
-        /* height: auto; */
-        margin: 10px 50vw;
-        transform: translateX(-50%);
-    }
-}
+        }
 
+        form {
+            position: relative;
+            width: 600px;
+            /* border: 3px solid red; */
+            display: flex;
+            /* top: 50px; */
+            /* overflow: hidden; */
+            justify-content: center;
+            /* align-items: center; */
+            flex-direction: column;
+            animation: slide_in 3s ease forwards;
+            /* margin-top: 100px; */
 
+        }
 
+        @keyframes slide_in {
+            from {
+                /* width: 0px; */
+                /* height: 0; */
+                margin: 0px;
 
-p{
-    display: block;
-    width: 150px;
-    margin: auto;
-    font-size: 15px;
-    font-weight: bold;
-}
-select,option, input,textarea{
-    background-color: #c6dee8;
-    padding: 5px 2px;
-    color:rgb(16, 41, 185);
-    font-weight: 800;
-    text-align: center;
-}
+            }
 
-label{
-    color: rgb(15, 15, 82);
-    font-weight: 600;
-}
-
-
-#phone_number,
-#email{
-    background-color: skyblue;
-    color: rgb(202, 111, 111);
-}
+            to {
+                /* width: 600px; */
+                /* height: auto; */
+                margin: 10px 50vw;
+                transform: translateX(-35%);
+            }
+        }
 
 
 
+
+        p {
+            display: block;
+            width: 150px;
+            margin: auto;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        select,
+        option,
+        input,
+        textarea {
+            background-color: #c6dee8;
+            padding: 5px 2px;
+            color: rgb(16, 41, 185);
+            font-weight: 800;
+            text-align: center;
+        }
+
+        label {
+            color: rgb(15, 15, 82);
+            font-weight: 600;
+        }
+
+
+        #phone_number,
+        #email {
+            background-color: skyblue;
+            color: rgb(202, 111, 111);
+        }
+
+        #table_div {
+            display: flex;
+            /* align-items: center; */
+            justify-content: center;
+        }
+
+        table {
+            display: none;
+            border-style: ridge;
+            border-width: 50px;
+            border-color: #d64a4a;
+            background-color: #2bcbd8d6;
+        }
+
+        th {
+            padding: 15px;
+            align-self: center;
+            border: 5px solid #095484;
+        }
+
+        td {
+            padding: 15px;
+            border: 20px groove #1c87c9;
+        }
+
+        #navbar {
+            overflow: hidden;
+            height: 100px;
+            width: 95vw;
+            /* margin: auto; */
+            text-align: center;
+            font-weight: bolder;
+            font-size: 70px;
+            margin-top: 20px;
+
+        }
     </style>
 </head>
 
 <body>
+    <div id="navbar">Library</div>
     <form action="index.html">
         <div>
             <label for="book_name">Title</label>
@@ -108,7 +158,7 @@ label{
         </div>
         <div>
             <label for="ISBN_number">ISBN_number</label>
-            <input type="text" name="ISBN_number" id="ISBN_number" placeholder='Eg: 12-34-1456-10-3440'required>
+            <input type="text" name="ISBN_number" id="ISBN_number" placeholder='Eg: 12-34-1456-10-3440' required>
             <p id="ISBN_number_p" style="display: none;"></p>
         </div>
         <div>
@@ -124,71 +174,143 @@ label{
         <div>
             <label for="Price">Price</label>
             <input type="text" name="Price" id="price" placeholder='Eg: 300' required>
-            <p id = "price_p" style="display: none;"></p>
+            <p id="price_p" style="display: none;"></p>
         </div>
         <div>
             <label for="Date of publication">Date of publication</label>
             <input type="text" name="Date_of_publication" id="Date_of_publication" placeholder='Eg: 01/12/19' required>
-            <p id = "Date_of_publication_p" style="display: none;"></p>
+            <p id="Date_of_publication_p" style="display: none;"></p>
         </div>
         <div>
             <input type="submit" id='submit' value="submit">
         </div>
     </form>
+
+    <div id="table_div">
+        <table id="table_">
+
+            <thead>
+                <tr>
+                    <th>Book </th>
+                </tr>
+                <!-- <tr>
+                    <th>Id</th>
+                    <th>ISBN</th>
+                    <th>Date</th>
+                    <th>Return Date</th>
+                </tr> -->
+            </thead>
+            <tbody>
+                <tr>
+                    <td>id</td>
+                    <td id="order_id">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab veritatis itaque
+                        voluptatibus recusandae inventore suscipit cumque nihil nisi ratione in.</td>
+                </tr>
+                <tr>
+                    <td>ISBN_number</td>
+                    <td id='book_isbn'>2-3-4-5-6</td>
+                </tr>
+                <tr>
+                    <td>Date</td>
+                    <td id='date'>sdf</td>
+                </tr>
+                <tr>
+                    <td>Return Date</td>
+                    <td id="return_date">wsefe</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     <script>
+        // console.log(date_.toLocaleDateString('en-US'));
+        // date_ = new Date;
+        // date_.setDate(date_.getDate() + 30)
         let submit = document.getElementById('submit');
-        submit.addEventListener('click', validate);
+        submit.addEventListener('click', validatee);
+        function validatee(e) {
+            verify = validate(e);
+            table_ = document.getElementById('table_');
+            verify == 0 ? showTable() : table_.style.display = 'none'
+            // table.style.display= 'block';
+            // document.getElementById("table_").style.display = 'block'
+        }
+        function showTable() {
+            order_id = document.getElementById('order_id')
+            book_isbn = document.getElementById('book_isbn')
+            id = Math.floor(Math.random() * (1000000 - 100000)) + 100000;
+            order_id.innerHTML = id;
+            ISBN_number = document.getElementById('ISBN_number');
+            book_isbn.innerHTML = ISBN_number.value;
+            date_ = new Date;
+            date = document.getElementById('date');
+            date.innerHTML = date_.toLocaleDateString('en-in')
+            return_date = document.getElementById('return_date');
+            date_.setDate(date_.getDate() + 30)
+            return_date.innerHTML = date_.toLocaleDateString('en-in');
+            table_.style.display = 'block';
+        }
         function validate(e) {
             e.preventDefault();
             book_name = document.getElementById('book_name');
-            if (book_name.value.length > 75) {
-                document.getElementById("book_name_p").innerHTML = 'You have crossed maximum no of characters';
-                document.getElementById("book_name_p").style.display='block'
+            if (book_name.value.length > 75 || book_name.value.length == 0) {
+                document.getElementById("book_name_p").innerHTML = 'You have either crossed maximum no of characters or havent filled';
+                document.getElementById("book_name_p").style.display = 'block'
+                return 1;
             }
-            else{
+            else {
                 document.getElementById('book_name_p').style.display = 'none'
             }
             author = document.getElementById('author');
             patt = /,/g;
-            var x=author.value.match(patt);
-            if(x!=null && x.length>4){
-                document.getElementById("author_p").innerHTML = 'Maximum no of authors is limited to 5';
-                document.getElementById("author_p").style.display='block'
-            }else{
+            var x = author.value.match(patt);
+            if (x != null && x.length > 4 || author.value.length == 0) {
+                document.getElementById("author_p").innerHTML = 'Atleast one author name is required and Maximum no of authors is limited to 5';
+                document.getElementById("author_p").style.display = 'block'
+                return 1;
+            } else {
                 document.getElementById('author_p').style.display = 'none'
             }
             ISBN_number = document.getElementById('ISBN_number');
-            patt =  /[0-9]*[-| ][0-9]*[-| ][0-9]*[-| ][0-9]*[-| ][0-9]*/g
-            x= ISBN_number.value.match(patt);
-            console.log(x);
-            if(x==null){
+            patt = /[0-9]*[-| ][0-9]*[-| ][0-9]*[-| ][0-9]*[-| ][0-9]*/g
+            x = ISBN_number.value.match(patt);
+            // console.log(x);
+            if (x == null) {
                 document.getElementById("ISBN_number_p").innerHTML = 'Please follow the order given in placeholder';
-                document.getElementById("ISBN_number_p").style.display='block'
-            }else{
+                document.getElementById("ISBN_number_p").style.display = 'block'
+                return 1;
+            } else {
                 document.getElementById('ISBN_number_p').style.display = 'none'
             }
+
             publisher = document.getElementById('publisher');
-            if (publisher.value.length > 30) {
-                document.getElementById("publisher_p").innerHTML = 'You have crossed maximum no of characters';
-                document.getElementById("publisher_p").style.display='block'
-            }else{
+            if (publisher.value.length > 30 || publisher.value.length==0  ) {
+                document.getElementById("publisher_p").innerHTML = "You have crossed maximum no of characters or haven't filled the field";
+                document.getElementById("publisher_p").style.display = 'block';
+                return 1;
+            } else {
                 document.getElementById('publisher_p').style.display = 'none'
             }
             edition = document.getElementById('edition');
             patt = /[1-9]/g
             x = edition.value.match(patt);
-            if (x!=null) {
-                document.getElementById("edition_p").innerHTML = 'Please provide string without numbers';
-                document.getElementById("edition_p").style.display='block'
-            }else{
+            // console.log(x);
+            
+            if (x != null || edition.value.length == 0) {
+                document.getElementById("edition_p").innerHTML = 'Please fill the field and provide string without numbers type';
+                document.getElementById("edition_p").style.display = 'block';
+                return 1;
+            } else {
                 document.getElementById('edition_p').style.display = 'none'
             }
             price = document.getElementById('price');
-            patt = /[A-Z]*[a-z]*/g
+            patt = /([0-9]*)/g
             x = price.value.match(patt);
-            if (x!=null) {
-                document.getElementById("price_p").innerHTML = 'please provide a true number';
+            console.log(x);
+            if (x==null || price.value.length == 0) {
+                document.getElementById("price_p").innerHTML = 'please fill the field and provide only a true number';
                 document.getElementById("price_p").style.display='block'
+                return 1;
             }else{
                 document.getElementById('price_p').style.display = 'none'
             }
@@ -196,12 +318,15 @@ label{
             patt = /[0-3][0-9]\/[0-1][0-9]\/[0-9][0-9]/g
             x = Date_of_publication.value.match(patt);
             console.log(x);
-            if (x==null) {
+            if (x == null) {
                 document.getElementById("Date_of_publication_p").innerHTML = 'please follow the format given in the placeholder';
-                document.getElementById("Date_of_publication_p").style.display='block'
-            }else{
+                document.getElementById("Date_of_publication_p").style.display = 'block'
+                return 1;
+            } else {
                 document.getElementById('Date_of_publication_p').style.display = 'none'
+                return 0;
             }
+            confirm('das')
         }
 
     </script>
